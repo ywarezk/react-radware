@@ -9,6 +9,7 @@ import styled from 'styled-components';
 export default styled.button`
 	padding-right: 10px;
 	padding-left: 10px;	
+	border-radius: 10px;
 	&:hover {
 		background-color: orange;
 		font-weight: bold;
