@@ -1,0 +1,71 @@
+<!--
+	
+	display: grid;
+	display: flex;
+	
+-->
+
+<html>
+
+	<style>
+		.layout {
+			display: grid;
+			grid-template-columns: 200px 1fr;
+			grid-template-rows: 100px 1fr 200px;
+			grid-template-areas: 
+			"nav header"
+			"nav content"
+			"nav footer" 
+			;
+			height: 100vh;
+			width: 100vw;
+		}
+		
+		.navigation {
+			grid-area: nav;
+			background-color: blue;
+		}
+		
+		.header {
+			grid-area: header;
+			background-color: orange;
+		}
+		
+		.content {
+			grid-area: content;
+			background-color: purple;
+		}
+		
+		.footer {
+			grid-area: footer;
+			background-color: red;
+		}
+		
+		@media (max-width: 600px) {
+			
+			.layout {
+				grid-template-areas: 
+				"header header"
+				"content content"
+				"footer footer" 
+				;
+			}
+			
+		}
+	</style>
+	<body>
+	
+		<div class="layout">
+			
+			<div class="navigation"></div>
+			
+			<div class="header"></div>
+			
+			<div class="content"></div>
+			
+			<div class="footer"></div>
+			
+		</div>
+	
+	</body>
+</html>
