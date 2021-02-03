@@ -39,5 +39,11 @@ Parent.js
 
 ### Promise
 
-
+- our server is located at the following URL: http://nztodo.herokuapp.com/api/tasks/?format=json
+- when you query the server you will get an array of `Task` objects.
+- Create a `Task` class containing the properties of the object the server is sending us.
+- Create a React component `TaskList` which will send a request to the server when the component is initiated in the `useEffect` hook.
+- Use `fetch` to send a request to our server.
+- The `fetch` will return a `Promise<Response>` using promise chaining convert the `Response` to `res.json()` and from json to the `Task` class we created.
+- Save the `Task` instances in the state in order to display  them n a `ul-li` list in the component
 
