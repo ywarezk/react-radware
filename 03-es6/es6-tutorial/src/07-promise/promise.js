@@ -62,6 +62,22 @@ setTimeout
  
  
  // fetch('...') => Promise
+ 
+ /**
+  * 
+  
+  class Promise {
+	  
+	  constructor(cb) {
+		  const resolve = () => {}
+		  const reject = () => {}
+		  
+		  cb(resolve, reject)
+	  }
+  }
+  
+  
+  */
 const timerPromise = new Promise((resolve, reject) => {
 	 
 	 // wraps your async code
