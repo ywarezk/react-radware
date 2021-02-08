@@ -58,6 +58,8 @@ setTimeout
 
 --------X--------------->
 
+------------------------>
+
  */
  
  
@@ -78,12 +80,19 @@ setTimeout
   
   
   */
+  
+/*
+Promise states:
+1. pending
+2. Fulffiled / rejected
+*/
 const timerPromise = new Promise((resolve, reject) => {
 	 
 	 // wraps your async code
 	 setTimeout(
 		 () => {
-			 resolve(42);
+			//  resolve(42);
+			reject(new Error('something happened'))
 		 },
 		 1000
 	 )
@@ -93,7 +102,10 @@ const timerPromise = new Promise((resolve, reject) => {
 timerPromise.then(
 	(meaningOfLife) => {
 		console.log('hello world' + meaningOfLife);	
- 	}
+ 	},
+	(err) => {
+		console.log(err.message);
+	}
 )
 
 timerPromise.then(
@@ -102,8 +114,105 @@ timerPromise.then(
  	}
 )
 
-timerPromise.then(
-	(meaningOfLife) => {
-		console.log('logic 2');	
- 	}
-)
+timerPromise.catch((err) => {
+	
+})
+
+
+function stam() {
+	
+	try {
+		// this code can fail	
+	} catch(err) {
+		// some generic stuff
+		throw err;		
+	}
+	
+	
+	
+	// throw new Error();
+}
+
+// try {
+// 	stam();	
+// } catch(err) {}
+
+/**
+ * 
+ 
+ fetch can fail
+ no internet
+ no server
+ 
+ response
+ response.status => 401
+ response.status => 403
+ response.status => 500
+ 
+ */
+class SendRequest {
+	
+	// Promise<json>
+	get(url) {
+		/*
+		
+		// pending
+		const promiseFetch = fetch(url);
+		
+		// 
+		const promiseFetch2 = promiseFetch
+			// 401
+			.then(
+				(response) => {
+					if (response.status === 401) {
+						// redirect the user to the login page
+					}
+					return response;	
+				}			
+			)
+			
+		// Promise<Response> => can also fail
+		const promiseFetch3 = promiseFetch2.then(
+			(response) => {
+				if (response.status === 403 || response.status === 500) {
+					throw new Error('something happened');
+				}
+				return response;
+			}
+		)
+		
+		return promiseFetch3;
+		
+		*/
+		
+		return fetch(url)
+			.then(
+				(response) => {
+					if (response.status === 401) {
+						// redirect the user to the login page
+					}
+					return response;	
+				}		
+			)
+			.then(
+				(response) => {
+					if (response.status === 403 || response.status === 500) {
+						throw new Error('something happened');
+					}
+					return response;
+				}
+			)
+			.catch((err) => {
+				return [];
+			})
+			.then(
+				(response) => {
+					return response.json()
+				}
+			)
+			.catch((err) => {
+				// some generic login
+				throw err;
+			})
+	}
+}
