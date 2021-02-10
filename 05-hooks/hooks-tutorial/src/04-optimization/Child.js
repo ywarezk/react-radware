@@ -1,5 +1,14 @@
 
-import { useState, useMemo, useRef } from 'react';
+/**
+
+useMemo
+React.memo
+useCallback - not really for optimization although many react developer for some reason
+think it is
+
+ */
+
+import { useState, useMemo, useRef, useCallback } from 'react';
 import Grand from './Grand';
 
 export default function Child() {
@@ -13,10 +22,10 @@ export default function Child() {
 	// })
 	
 	
-	const heavyCalculation = useMemo(() => {
+	const someRandomNumber = useMemo(() => {
 		let someCalculation = 1;
 		for (let i = 0; i < 1000000; i++) {
-			someCalculation+=i;
+			someCalculation+= Math.random();
 		}
 		return someCalculation;	
 	}, [])
@@ -25,24 +34,24 @@ export default function Child() {
 	const someHeavyCalculation = () => {
 		let someCalculation = 1;
 		for (let i = 0; i < 1000000; i++) {
-			someCalculation+=i;
+			someCalculation+= Math.random();
 		}
 		return someCalculation;	
 	}
-	someHeavyCalculation();
+	const someRandomNumber = someHeavyCalculation();
 	*/
 	
 	
-	const handleClick = () => {
+	const handleClick = useCallback(() => {
 		setCounter(counter + 1);
-	}
+	}, [])
 	
 	return (
 		<>
 			<h1 onClick={handleClick}>
-				Child
+				Child {someRandomNumber}
 			</h1>
-			<Grand />
+			<Grand cb={handleClick} />
 		</>
 	)
 }
